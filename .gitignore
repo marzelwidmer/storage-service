@@ -18,6 +18,7 @@
 <<<<<<< HEAD
 # Maven
 /log/
+/upload-dir/
 /logs/
 /target/
 release.properties
