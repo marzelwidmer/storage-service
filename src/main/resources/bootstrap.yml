@@ -1,0 +1,21 @@
+encrypt:
+  key: 2224c9b0294f4f429dba92fb92eb75d6
+
+spring:
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: config-server
+      username: user
+      password: '{cipher}97913556dc691f8b86299b4b38171226e0e5b17a10e7affb036db364009bdbf5'
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_SERVICE_URL:http://127.0.0.1:8761}/eureka/
+  instance:
+    statusPageUrlPath: /manage/info
+    healthCheckUrlPath: /manage/health
+    hostname: ${SERVER_NAME:localhost}
+    prefer-ip-address: false

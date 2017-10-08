@@ -1,0 +1,85 @@
+# Spring
+spring:
+  profiles:
+    active: local
+  application:
+    name: @project.name@
+  # I18N (MessageSourceAutoConfiguration)
+  messages:
+    basename: i18n/messages
+    cache-seconds: -1
+    encoding: UTF-8
+  cloud:
+    config:
+      label: @project.name@
+  hateoas:
+     use-hal-as-default-json-media-type: true
+  sleuth:
+    enabled: true
+    sampler:
+      percentage: 1.0
+  zipkin:
+    compression:
+      enabled: true
+    locator:
+      discovery:
+        enabled: true
+    flush-interval: 1
+    service:
+      name: @project.name@
+    base-url: http://${server.address}:9411/
+  http:
+    multipart:
+      max-request-size: 128KB
+      max-file-size: 128KB
+
+# Server
+server:
+ use-forward-headers: true
+ context-path: /
+ port: 0
+ address: localhost
+ compression:
+   enabled: true
+   mime-types: application/json,application/xml,text/html,text/xml,text/plain
+# Logging
+logging:
+  path: log/
+# Infos Build
+info:
+  build:
+    artifact: @project.artifactId@
+    name: @project.name@
+    description: @project.description@
+    version: @project.version@
+# Security
+security:
+  user:
+    username: user
+    password: '{cipher}b90b4efc95fe1b35d1cdc0ee5a9297c759bbfe33ef798160a58a160de557f394'
+  basic:
+    enabled: false
+# Management
+management:
+  context-path: /manage
+  security:
+    enabled: false
+  info:
+     git:
+       mode: full
+  health:
+    refresh:
+      enabled: true
+# Endpoints
+endpoints:
+  restart:
+    enabled: true
+  shutdown:
+    enabled: true
+  health:
+    enabled: true
+    sensitive: false
+  logfile:
+    sensitive: false
+  security:
+    enabled: true

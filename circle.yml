@@ -1,0 +1,14 @@
+dependencies:
+  pre:
+    - sudo apt-get install jq
+    - wget -O ~/codacy-coverage-reporter-assembly-latest.jar $(curl https://api.github.com/repos/codacy/codacy-coverage-reporter/releases/latest | jq -r .assets[0].browser_download_url)
+
+machine:
+  java:
+    version: oraclejdk8
+test:
+  post:
+    - mvn jacoco:report
+    - java -cp ~/codacy-coverage-reporter-assembly-latest.jar com.codacy.CodacyCoverageReporter -l Java -r  target/site/jacoco/jacoco.xml
+    - mkdir -p $CIRCLE_TEST_REPORTS/junit/
+    - find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
