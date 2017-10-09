@@ -3,7 +3,7 @@
 [ditaa, "context-diagram"]
 ....
 +---------------+    REST      +-----------------+
-|   client      |--------------| product-service |
+|   client      |--------------| storage-service |
 +---------------+              +-----------------+
                                        |
                                        | JPA
