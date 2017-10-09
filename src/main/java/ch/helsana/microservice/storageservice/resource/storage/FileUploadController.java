@@ -1,4 +1,4 @@
-package ch.helsana.microservice.storageservice.storage;
+package ch.helsana.microservice.storageservice.resource.storage;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.util.stream.Collectors;
 
 @Controller
+@RequestMapping(value = "/upload")
 public class FileUploadController {
 
     private final StorageService storageService;
@@ -52,7 +53,7 @@ public class FileUploadController {
         redirectAttributes.addFlashAttribute("message",
                 "You successfully uploaded " + file.getOriginalFilename() + "!");
 
-        return "redirect:/";
+        return "redirect:/upload/";
     }
 
     @ExceptionHandler(StorageFileNotFoundException.class)

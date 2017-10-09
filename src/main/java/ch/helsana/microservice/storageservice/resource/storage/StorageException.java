@@ -1,4 +1,4 @@
-package ch.helsana.microservice.storageservice.storage;
+package ch.helsana.microservice.storageservice.resource.storage;
 
 public class StorageException extends RuntimeException {
 

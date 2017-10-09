@@ -1,3 +1,6 @@
+storage:
+ upload-dir: upload-dir
+
 # Spring
 spring:
   # Database

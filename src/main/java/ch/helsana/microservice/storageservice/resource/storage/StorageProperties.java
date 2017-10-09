@@ -1,4 +1,4 @@
-package ch.helsana.microservice.storageservice.storage;
+package ch.helsana.microservice.storageservice.resource.storage;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

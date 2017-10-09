@@ -1,5 +1,5 @@
 ${AnsiColor.BRIGHT_BLUE}
-${AnsiColor.BRIGHT_BLUE} _    _       _                 _
+${AnsiColor.BRIGHT_BLUE} _    _       _                 _   ${spring.profiles.active}
 ${AnsiColor.BRIGHT_BLUE}| |  | |     | |               | |  ${spring.application.name}
 ${AnsiColor.BRIGHT_BLUE}| |  | |_ __ | | ___   __ _  __| |  ${info.build.version}
 ${AnsiColor.BRIGHT_BLUE}| |  | | '_ \| |/ _ \ / _` |/ _` |  address:${server.address}

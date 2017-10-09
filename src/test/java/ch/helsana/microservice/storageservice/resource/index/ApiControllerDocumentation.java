@@ -31,6 +31,9 @@ public class ApiControllerDocumentation {
     private static final String SELF = "self";
     private static final String SELF_DESCRIPTION = "This resource";
 
+    private static final String UPLOAD = "upload";
+    private static final String UPLOAD_DESCRIPTION = "Documentation link";
+
     private static final String DOCUMENTATION = "documentation";
     private static final String DOCUMENTATION_DESCRIPTION = "Documentation link";
 
@@ -47,6 +50,7 @@ public class ApiControllerDocumentation {
                         preprocessResponse(prettyPrint()),
                         links(halLinks(),
                                 linkWithRel(SELF).description(SELF_DESCRIPTION),
+                                linkWithRel(UPLOAD).description(UPLOAD_DESCRIPTION),
                                 linkWithRel(DOCUMENTATION).description(DOCUMENTATION_DESCRIPTION)
 
                         )));
