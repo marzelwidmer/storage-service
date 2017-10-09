@@ -1,7 +1,7 @@
-package ch.helsana.microservice.uploadservice;
+package ch.helsana.microservice.storageservice;
 
-import ch.helsana.microservice.uploadservice.storage.StorageProperties;
-import ch.helsana.microservice.uploadservice.storage.StorageService;
+import ch.helsana.microservice.storageservice.storage.StorageProperties;
+import ch.helsana.microservice.storageservice.storage.StorageService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,10 +15,10 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 @EnableEurekaClient
 @EnableConfigurationProperties(StorageProperties.class)
-public class UploadMicroService {
+public class StorageMicroService {
 
     public static void main(String[] args) {
-        SpringApplication.run(UploadMicroService.class, args);
+        SpringApplication.run(StorageMicroService.class, args);
     }
 
     @Bean

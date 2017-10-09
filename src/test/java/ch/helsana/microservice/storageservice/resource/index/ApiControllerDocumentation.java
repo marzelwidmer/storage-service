@@ -1,4 +1,4 @@
-package ch.helsana.microservice.uploadservice.resource.index;
+package ch.helsana.microservice.storageservice.resource.index;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

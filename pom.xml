@@ -3,12 +3,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>ch.helsana.microservice</groupId>
-    <artifactId>upload-service</artifactId>
+    <artifactId>storage-service</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>upload-service</name>
-    <description>upload service</description>
+    <name>storage-service</name>
+    <description>storage service</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>

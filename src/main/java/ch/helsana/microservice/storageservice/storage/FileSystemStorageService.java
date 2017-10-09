@@ -1,4 +1,4 @@
-package ch.helsana.microservice.uploadservice.storage;
+package ch.helsana.microservice.storageservice.storage;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
