@@ -1,9 +1,14 @@
 package ch.helsana.microservice.storageservice.resource.storage;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-@ConfigurationProperties("storage")
+@ConfigurationProperties("application.storage")
 public class StorageProperties {
+
+
+    @Value(value = "${location:${java.io.tmpdir}/upload-dir/}")
+    private String storageLocation;
 
     /**
      * Folder location for storing files
@@ -11,11 +16,11 @@ public class StorageProperties {
     private String location = "upload-dir";
 
     public String getLocation() {
-        return location;
+        return storageLocation;
     }
 
     public void setLocation(String location) {
-        this.location = location;
+        this.storageLocation = location;
     }
 
 }

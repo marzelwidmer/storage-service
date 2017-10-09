@@ -1,3 +1,8 @@
+# Application Specific Configurations
+application:
+  storage:
+    location: upload-dir/
+
 # Spring
 spring:
   profiles:
@@ -30,8 +35,10 @@ spring:
     base-url: http://${server.address}:9411/
   http:
     multipart:
-      max-request-size: 128KB
-      max-file-size: 128KB
+      max-request-size: 10MB
+      max-file-size: 10MB
+#      enabled: true
+#      location: ${application.storage.location}
 
 # Server
 server:
