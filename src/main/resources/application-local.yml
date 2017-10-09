@@ -1,5 +1,5 @@
 storage:
- upload-dir: upload-dir
+  upload-dir: upload-dir
 
 # Spring
 spring:
