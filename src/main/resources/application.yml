@@ -1,7 +1,7 @@
 # Application Specific Configurations
 application:
   storage:
-    location: tmp/
+    location: tmp/upload_dir/
 
 # Spring
 spring:
