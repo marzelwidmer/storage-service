@@ -1,7 +1,6 @@
 package ch.helsana.microservice.storageservice.infrastructure.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Entity;
@@ -11,16 +10,18 @@ import javax.persistence.Lob;
 
 @Entity
 @Data
-public class Upload {
+@Builder
+@EqualsAndHashCode(of = {"id"})
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+public class StorageFile {
 
-    @JsonIgnore
     @Id
     @GeneratedValue(generator = "system-uuid")
     @GenericGenerator(name = "system-uuid", strategy = "uuid")
     private String id;
-
-    private String name;
-
+    private String filename;
     @Lob
     private byte[] data;
 

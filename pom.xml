@@ -37,7 +37,7 @@
         <maven-install-plugin.version>2.5.2</maven-install-plugin.version>
         <!-- jGitFlow -->
         <jgitflow-maven-plugin.version>1.0-m5.1</jgitflow-maven-plugin.version>
-        <!-- Used for Nexus Upload -->
+        <!-- Used for Nexus StorageFile -->
         <wagon-webdav-jackrabbit.version>2.4</wagon-webdav-jackrabbit.version>
         <!-- Asciidoc -->
         <asciidoctor.maven.plugin.version>1.5.3</asciidoctor.maven.plugin.version>
@@ -260,7 +260,7 @@
                 </configuration>
             </plugin>
         </plugins>
-        <!-- Used for Nexus Upload -->
+        <!-- Used for Nexus StorageFile -->
         <extensions>
             <extension>
                 <groupId>org.apache.maven.wagon</groupId>

@@ -18,19 +18,26 @@ import java.util.stream.Collectors;
 @RequestMapping(value = "/upload")
 public class FileUploadController {
 
-    private final StorageService storageService;
+    private final DatabaseStorageService databaseStorageService;
+//    private final FileSystemStorageService fileSystemStorageService;
 
     @Autowired
-    public FileUploadController(StorageService storageService) {
-        this.storageService = storageService;
+    public FileUploadController(FileSystemStorageService fileSystemStorageService, DatabaseStorageService databaseStorageService) {
+//        this.fileSystemStorageService = fileSystemStorageService;
+        this.databaseStorageService = databaseStorageService;
     }
 
     @GetMapping("/")
     public String listUploadedFiles(Model model) throws IOException {
 
-        model.addAttribute("files", storageService.loadAll().map(
+//        model.addAttribute("files", fileSystemStorageService.loadAll().map(
+//                path -> MvcUriComponentsBuilder.fromMethodName(FileUploadController.class,
+//                        "serveFile", path.getFileName().toString()).build().toString())
+//                .collect(Collectors.toList()));
+
+        model.addAttribute("files", databaseStorageService.loadAll().stream().map(
                 path -> MvcUriComponentsBuilder.fromMethodName(FileUploadController.class,
-                        "serveFile", path.getFileName().toString()).build().toString())
+                        "serveFile", path.getFilename().toString()).build().toString())
                 .collect(Collectors.toList()));
 
         return "uploadForm";
@@ -40,7 +47,9 @@ public class FileUploadController {
     @ResponseBody
     public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
 
-        Resource file = storageService.loadAsResource(filename);
+        Resource file = databaseStorageService.loadAsResource(filename);
+
+//        Resource file = fileSystemStorageService.loadAsResource(filename);
         return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
                 "attachment; filename=\"" + file.getFilename() + "\"").body(file);
     }
@@ -48,12 +57,14 @@ public class FileUploadController {
     @PostMapping("/")
     public String handleFileUpload(@RequestParam("file") MultipartFile file,
             RedirectAttributes redirectAttributes) {
+            databaseStorageService.store(file);
 
-        storageService.store(file);
+        //fileSystemStorageService.store(file);
+
         redirectAttributes.addFlashAttribute("message",
                 "You successfully uploaded " + file.getOriginalFilename() + "!");
 
-        return "uploadForm";
+        return "redirect:/upload/";
     }
 
     @ExceptionHandler(StorageFileNotFoundException.class)

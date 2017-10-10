@@ -15,7 +15,7 @@
 # Maven
 /log/
 /logs/
-/upload-dir/
+/storageFile-dir/
 /target/
 release.properties
 dependency-reduced-pom.xml
