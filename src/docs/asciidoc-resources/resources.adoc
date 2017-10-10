@@ -1,0 +1,18 @@
+[[resources-api]]
+==  Api
+The api provides the entry point into the service.
+
+=== Accessing the api
+A `GET` request is used to access the index
+
+==== Example request curl
+include::{snippets}/get-api/curl-request.adoc[]
+
+==== Example request HTTP
+include::{snippets}/get-api/http-request.adoc[]
+
+==== Example response
+include::{snippets}/get-api/http-response.adoc[]
+
+==== Links
+include::{snippets}/get-api/links.adoc[]
