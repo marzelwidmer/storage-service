@@ -1,4 +1,4 @@
-package ch.helsana.microservice.storageservice.resource.storage;
+package ch.helsana.microservice.storageservice.resource.storage.database;
 
 import ch.helsana.microservice.storageservice.infrastructure.domain.StorageFile;
 import org.springframework.data.repository.CrudRepository;

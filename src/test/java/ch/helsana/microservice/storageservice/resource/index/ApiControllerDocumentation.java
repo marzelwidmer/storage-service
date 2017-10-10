@@ -1,6 +1,6 @@
 package ch.helsana.microservice.storageservice.resource.index;
 
-import ch.helsana.microservice.storageservice.resource.storage.StorageService;
+import ch.helsana.microservice.storageservice.resource.storage.filesystem.FileSystemStorageService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +43,7 @@ public class ApiControllerDocumentation {
     private MockMvc mockMvc;
 
     @MockBean
-    private StorageService storageService;
+    private FileSystemStorageService fileSystemStorageService;
 
 
     @Test

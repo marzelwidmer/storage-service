@@ -1,5 +1,6 @@
-package ch.helsana.microservice.storageservice.resource.storage;
+package ch.helsana.microservice.storageservice.resource.storage.filesystem;
 
+import ch.helsana.microservice.storageservice.infrastructure.exception.StorageFileNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -15,50 +16,45 @@ import java.io.IOException;
 import java.util.stream.Collectors;
 
 @Controller
-@RequestMapping(value = "/storage")
-public class StorageUploadController {
+@RequestMapping(value = "/upload")
+public class FileUploadController {
 
-    private final DatabaseStorageService databaseStorageService;
+    private final FileSystemStorageService fileSystemStorageService;
 
     @Autowired
-    public StorageUploadController(FileSystemStorageService fileSystemStorageService, DatabaseStorageService databaseStorageService) {
-        this.databaseStorageService = databaseStorageService;
+    public FileUploadController(FileSystemStorageService fileSystemStorageService) {
+        this.fileSystemStorageService = fileSystemStorageService;
     }
 
     @GetMapping("/")
     public String listUploadedFiles(Model model) throws IOException {
-        model.addAttribute("files", databaseStorageService.loadAll().stream().map(
-                path -> MvcUriComponentsBuilder.fromMethodName(StorageUploadController.class,
-                        "serveFile",  path.getId().toString() + "/" + path.getFilename().toString()).build().toString())
+
+        model.addAttribute("files", fileSystemStorageService.loadAll().map(
+                path -> MvcUriComponentsBuilder.fromMethodName(FileUploadController.class,
+                        "serveFile", path.getFileName().toString()).build().toString())
                 .collect(Collectors.toList()));
 
         return "uploadForm";
     }
 
-    @GetMapping("/files/{id:.+}")
+    @GetMapping("/files/{filename:.+}")
     @ResponseBody
-    public ResponseEntity<Resource> serveFile(@PathVariable String id) {
-        Resource file = databaseStorageService.loadAsResource(id);
-        return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
-                "attachment; filename=\"" + file.getFilename() + "\"").body(file);
-    }
+    public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
 
-
-    @GetMapping("/files/{id:.+}/{filename:.+}")
-    @ResponseBody
-    public ResponseEntity<Resource> serveFile(@PathVariable String id, @PathVariable String filename) {
-        Resource file = databaseStorageService.loadAsResource(id);
+        Resource file = fileSystemStorageService.loadAsResource(filename);
         return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
                 "attachment; filename=\"" + file.getFilename() + "\"").body(file);
     }
 
     @PostMapping("/")
     public String handleFileUpload(@RequestParam("file") MultipartFile file,
-            RedirectAttributes redirectAttributes) {
-            databaseStorageService.store(file);
+                                   RedirectAttributes redirectAttributes) {
+
+        fileSystemStorageService.store(file);
         redirectAttributes.addFlashAttribute("message",
                 "You successfully uploaded " + file.getOriginalFilename() + "!");
-        return "redirect:/storage/";
+
+        return "redirect:/upload/";
     }
 
     @ExceptionHandler(StorageFileNotFoundException.class)

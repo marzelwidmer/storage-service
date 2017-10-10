@@ -1,4 +1,4 @@
-package ch.helsana.microservice.storageservice.resource.storage;
+package ch.helsana.microservice.storageservice.infrastructure.exception;
 
 public class StorageFileNotFoundException extends StorageException {
 

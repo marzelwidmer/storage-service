@@ -1,7 +1,7 @@
 package ch.helsana.microservice.storageservice;
 
-import ch.helsana.microservice.storageservice.resource.storage.StorageProperties;
-import ch.helsana.microservice.storageservice.resource.storage.StorageService;
+import ch.helsana.microservice.storageservice.infrastructure.config.StorageProperties;
+import ch.helsana.microservice.storageservice.resource.storage.filesystem.FileSystemStorageService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,10 +22,10 @@ public class StorageMicroService {
     }
 
     @Bean
-    CommandLineRunner init(StorageService storageService) {
+    CommandLineRunner init(FileSystemStorageService fileSystemStorageService) {
         return (args) -> {
-            storageService.deleteAll();
-            storageService.init();
+            fileSystemStorageService.deleteAll();
+            fileSystemStorageService.init();
         };
     }
 }

@@ -1,6 +1,8 @@
-package ch.helsana.microservice.storageservice.resource.storage;
+package ch.helsana.microservice.storageservice.resource.storage.database;
 
 import ch.helsana.microservice.storageservice.infrastructure.domain.StorageFile;
+import ch.helsana.microservice.storageservice.infrastructure.exception.StorageException;
+import ch.helsana.microservice.storageservice.infrastructure.exception.StorageFileNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -19,11 +21,8 @@ public class DatabaseStorageService {
 
     private StorageRepository storageRepository;
 
-    private final Path rootLocation;
-
     @Autowired
-    public DatabaseStorageService(StorageProperties properties, StorageRepository storageRepository) {
-        this.rootLocation = Paths.get(properties.getLocation());
+    public DatabaseStorageService(StorageRepository storageRepository) {
         this.storageRepository = storageRepository;
     }
 
