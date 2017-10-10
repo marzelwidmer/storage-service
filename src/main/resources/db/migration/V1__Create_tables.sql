@@ -19,3 +19,8 @@
 -- );
 --
 -- ${oracle} GRANT SELECT, INSERT, UPDATE, DELETE ON "SESSIONS" TO ${grant.user};
+CREATE TABLE UPLOAD (
+  "ID" VARCHAR (255 char),
+  "NAME" VARCHAR(128) DEFAULT NULL,
+  "DATA" BLOB
+)
