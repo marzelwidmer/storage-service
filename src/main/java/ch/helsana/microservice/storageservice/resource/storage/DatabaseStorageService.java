@@ -53,7 +53,7 @@ public class DatabaseStorageService {
     }
 
 
-    public Resource loadAsResource(String filename) {
+    public Resource loadAsResourceByFileName(String filename) {
         StorageFile storageFile = storageRepository.findByFilename(filename);
         try {
             Path file = Files.write(Paths.get(storageFile.getFilename()), storageFile.getData());
@@ -61,6 +61,17 @@ public class DatabaseStorageService {
             return resource;
         } catch (Exception e) {
             throw new StorageFileNotFoundException("Could not read file: " + filename, e);
+        }
+    }
+
+    public Resource loadAsResource(String id) {
+        StorageFile storageFile = storageRepository.findOne(id);
+        try {
+            Path file = Files.write(Paths.get(storageFile.getFilename()), storageFile.getData());
+            Resource resource = new UrlResource(file.toUri());
+            return resource;
+        } catch (Exception e) {
+            throw new StorageFileNotFoundException("Could not read file: " + id, e);
         }
     }
 

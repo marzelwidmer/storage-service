@@ -15,44 +15,49 @@ import java.io.IOException;
 import java.util.stream.Collectors;
 
 @Controller
-@RequestMapping(value = "/upload")
-public class FileUploadController {
+@RequestMapping(value = "/storage")
+public class StorageUploadController {
 
-    private final StorageService storageService;
+    private final DatabaseStorageService databaseStorageService;
 
     @Autowired
-    public FileUploadController(StorageService storageService) {
-        this.storageService = storageService;
+    public StorageUploadController(FileSystemStorageService fileSystemStorageService, DatabaseStorageService databaseStorageService) {
+        this.databaseStorageService = databaseStorageService;
     }
 
     @GetMapping("/")
     public String listUploadedFiles(Model model) throws IOException {
-
-        model.addAttribute("files", storageService.loadAll().map(
-                path -> MvcUriComponentsBuilder.fromMethodName(FileUploadController.class,
-                        "serveFile", path.getFileName().toString()).build().toString())
+        model.addAttribute("files", databaseStorageService.loadAll().stream().map(
+                path -> MvcUriComponentsBuilder.fromMethodName(StorageUploadController.class,
+                        "serveFile",  path.getId().toString() + "/" + path.getFilename().toString()).build().toString())
                 .collect(Collectors.toList()));
 
         return "uploadForm";
     }
 
-    @GetMapping("/files/{filename:.+}")
+    @GetMapping("/files/{id:.+}")
     @ResponseBody
-    public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
+    public ResponseEntity<Resource> serveFile(@PathVariable String id) {
+        Resource file = databaseStorageService.loadAsResource(id);
+        return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
+                "attachment; filename=\"" + file.getFilename() + "\"").body(file);
+    }
 
-        Resource file = storageService.loadAsResource(filename);
+
+    @GetMapping("/files/{id:.+}/{filename:.+}")
+    @ResponseBody
+    public ResponseEntity<Resource> serveFile(@PathVariable String id, @PathVariable String filename) {
+        Resource file = databaseStorageService.loadAsResource(id);
         return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
                 "attachment; filename=\"" + file.getFilename() + "\"").body(file);
     }
 
     @PostMapping("/")
     public String handleFileUpload(@RequestParam("file") MultipartFile file,
-                                   RedirectAttributes redirectAttributes) {
-
-        storageService.store(file);
+            RedirectAttributes redirectAttributes) {
+            databaseStorageService.store(file);
         redirectAttributes.addFlashAttribute("message",
                 "You successfully uploaded " + file.getOriginalFilename() + "!");
-
         return "redirect:/upload/";
     }
 
