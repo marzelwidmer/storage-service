@@ -58,7 +58,7 @@ public class StorageUploadController {
             databaseStorageService.store(file);
         redirectAttributes.addFlashAttribute("message",
                 "You successfully uploaded " + file.getOriginalFilename() + "!");
-        return "redirect:/upload/";
+        return "redirect:/storage/";
     }
 
     @ExceptionHandler(StorageFileNotFoundException.class)
