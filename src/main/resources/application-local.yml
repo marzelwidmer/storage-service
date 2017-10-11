@@ -17,5 +17,11 @@ spring:
       settings:
         trace: false
         web-allow-others: false
+  thymeleaf:
+    cache: false
+#    enabled: true
+#    prefix: classpath:/templates/
+#    suffix: .html
+
 server:
   port: 9003
