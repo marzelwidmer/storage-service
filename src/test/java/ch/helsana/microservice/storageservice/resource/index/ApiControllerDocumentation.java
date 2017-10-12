@@ -31,13 +31,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class ApiControllerDocumentation {
 
     private static final String SELF = "self";
-    private static final String SELF_DESCRIPTION = "This resource";
+    private static final String SELF_DESCRIPTION = "This resource.";
 
     private static final String UPLOAD = "upload";
-    private static final String UPLOAD_DESCRIPTION = "Documentation link";
+    private static final String UPLOAD_DESCRIPTION = "Filesystem upload link.";
+
+    private static final String STORAGE = "storage";
+    private static final String STORAGE_DESCRIPTION = "Storage (DB) upload link.";
 
     private static final String DOCUMENTATION = "documentation";
-    private static final String DOCUMENTATION_DESCRIPTION = "Documentation link";
+    private static final String DOCUMENTATION_DESCRIPTION = "Documentation link.";
 
     @Autowired
     private MockMvc mockMvc;
@@ -56,6 +59,7 @@ public class ApiControllerDocumentation {
                         links(halLinks(),
                                 linkWithRel(SELF).description(SELF_DESCRIPTION),
                                 linkWithRel(UPLOAD).description(UPLOAD_DESCRIPTION),
+                                linkWithRel(STORAGE).description(STORAGE_DESCRIPTION),
                                 linkWithRel(DOCUMENTATION).description(DOCUMENTATION_DESCRIPTION)
 
                         )));
