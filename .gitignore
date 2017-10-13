@@ -42,11 +42,7 @@ rebel.xml
 
 
 #Deployment
-src/main/resources/static/
-src/main/resources/static/cxApp
-src/main/resources/static/fonts
 src/main/resources/static/*.html
-src/main/frontend/app/styles/*.css.json
 *.pid
 .dev
 .dist
