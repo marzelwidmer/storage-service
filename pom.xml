@@ -77,10 +77,6 @@
         <sql-script-dir>${project.build.directory}/sql-scripts</sql-script-dir>
         <grant-user>myhlscustomeruser</grant-user>
         <groovy-maven-plugin.version>2.0</groovy-maven-plugin.version>
-
-        <!-- ================= FSL Components ===================== -->
-        <!-- security component -->
-        <fsl-security.version>1.0.0-SNAPSHOT</fsl-security.version>
         <bootstrap.version>3.3.7</bootstrap.version>
         <jquery.version>3.1.1</jquery.version>
     </properties>
