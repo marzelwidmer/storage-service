@@ -52,7 +52,7 @@ public class FileUploadController {
 
         fileSystemStorageService.store(file);
         redirectAttributes.addFlashAttribute("message",
-                "You successfully uploaded " + file.getOriginalFilename() + "!");
+                "You successfully upload " + file.getOriginalFilename() + "!");
 
         return "redirect:/upload/";
     }
