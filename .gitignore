@@ -58,3 +58,4 @@ src/main/resources/static/*.html
 
 #Logs
 *.log
+src/main/resources/static/manage/docs/
