@@ -19,9 +19,9 @@ spring:
         web-allow-others: false
   thymeleaf:
     cache: false
-#    enabled: true
-#    prefix: classpath:/templates/
-#    suffix: .html
+  zipkin:
+    enabled: false
+
 
 server:
   port: 9003
