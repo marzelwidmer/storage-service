@@ -1,14 +1,15 @@
-package ch.helsana.microservice.storageservice.resource.storage.database;
+package ch.helsana.microservice.storageservice.resource.storage;
 
 import ch.helsana.microservice.storageservice.infrastructure.exception.StorageFileNotFoundException;
-import ch.helsana.microservice.storageservice.resource.storage.filesystem.FileSystemStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
 import java.io.IOException;
@@ -16,19 +17,28 @@ import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping(value = "/upload")
-public class StorageUploadUIController {
+public class UploadController {
 
     private final DatabaseStorageService databaseStorageService;
 
     @Autowired
-    public StorageUploadUIController(FileSystemStorageService fileSystemStorageService, DatabaseStorageService databaseStorageService) {
+    public UploadController(DatabaseStorageService databaseStorageService) {
         this.databaseStorageService = databaseStorageService;
     }
+
+
+    @PostMapping("/")
+    public ResponseEntity fileUpload(@RequestParam("file") MultipartFile file) {
+        databaseStorageService.store(file);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+
 
     @GetMapping("/")
     public String listUploadedFiles(Model model) throws IOException {
         model.addAttribute("files", databaseStorageService.loadAll().stream().map(
-                path -> MvcUriComponentsBuilder.fromMethodName(StorageUploadUIController.class,
+                path -> MvcUriComponentsBuilder.fromMethodName(UploadController.class,
                         "serveFile",  path.getId().toString() + "/" + path.getFilename().toString()).build().toString())
                 .collect(Collectors.toList()));
 

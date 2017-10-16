@@ -1,4 +1,4 @@
-package ch.helsana.microservice.storageservice.resource.storage.database;
+package ch.helsana.microservice.storageservice.resource.storage;
 
 import ch.helsana.microservice.storageservice.infrastructure.domain.StorageFile;
 import ch.helsana.microservice.storageservice.infrastructure.exception.StorageException;
