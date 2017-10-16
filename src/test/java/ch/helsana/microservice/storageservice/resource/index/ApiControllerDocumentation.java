@@ -33,10 +33,10 @@ public class ApiControllerDocumentation {
     private static final String SELF = "self";
     private static final String SELF_DESCRIPTION = "This resource.";
 
-    private static final String UPLOAD = "upload";
+    private static final String UPLOAD = "uploadfile";
     private static final String UPLOAD_DESCRIPTION = "Filesystem upload link.";
 
-    private static final String STORAGE = "storage";
+    private static final String STORAGE = "upload";
     private static final String STORAGE_DESCRIPTION = "Storage (DB) upload link.";
 
     private static final String DOCUMENTATION = "documentation";

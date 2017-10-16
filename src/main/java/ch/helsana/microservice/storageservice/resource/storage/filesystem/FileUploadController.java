@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.util.stream.Collectors;
 
 @Controller
-@RequestMapping(value = "/upload")
+@RequestMapping(value = "/uploadfile")
 public class FileUploadController {
 
     private final FileSystemStorageService fileSystemStorageService;
@@ -54,7 +54,7 @@ public class FileUploadController {
         redirectAttributes.addFlashAttribute("message",
                 "You successfully upload " + file.getOriginalFilename() + "!");
 
-        return "redirect:/upload/";
+        return "redirect:/uploadfile/";
     }
 
     @ExceptionHandler(StorageFileNotFoundException.class)

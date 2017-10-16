@@ -1,7 +1,7 @@
 package ch.helsana.microservice.storageservice.resource.index;
 
 
-import ch.helsana.microservice.storageservice.resource.storage.database.StorageUploadController;
+import ch.helsana.microservice.storageservice.resource.storage.database.UploadController;
 import ch.helsana.microservice.storageservice.resource.storage.filesystem.FileUploadController;
 import org.springframework.hateoas.ResourceSupport;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,8 +22,8 @@ public class ApiController {
     public ResourceSupport api() {
         ResourceSupport resourceSupport = new ResourceSupport();
         resourceSupport.add(linkTo(methodOn(ApiController.class).api()).withSelfRel());
-        resourceSupport.add(linkTo(FileUploadController.class).withRel("upload"));
-        resourceSupport.add(linkTo(StorageUploadController.class).withRel("storage"));
+        resourceSupport.add(linkTo(FileUploadController.class).withRel("uploadfile"));
+        resourceSupport.add(linkTo(UploadController.class).withRel("upload"));
         resourceSupport.add(linkTo(ApiController.class).slash("/manage").slash("/docs/manual.html").withRel("documentation"));
 
         return resourceSupport;

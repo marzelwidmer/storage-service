@@ -5,6 +5,6 @@ ${AnsiColor.BRIGHT_BLUE} ___| |_ ___  _ __ __ _  __ _  ___  ${spring.profiles.ac
 ${AnsiColor.BRIGHT_BLUE}/ __| __/ _ \| '__/ _` |/ _` |/ _ \ ${spring.application.name}
 ${AnsiColor.BRIGHT_BLUE}\__ \ || (_) | | | (_| | (_| |  __/ ${info.build.version}
 ${AnsiColor.BRIGHT_BLUE}|___/\__\___/|_|  \__,_|\__, |\___| address:${server.address}
-${AnsiColor.BRIGHT_BLUE}                         __/ |
+${AnsiColor.BRIGHT_BLUE}                         __/ |      port:${server.port}
 ${AnsiColor.BRIGHT_BLUE}                        |___/
 ${AnsiColor.BRIGHT_BLUE}

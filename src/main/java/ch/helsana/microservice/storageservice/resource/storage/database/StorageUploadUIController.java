@@ -9,28 +9,26 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 import java.util.stream.Collectors;
 
 @Controller
-@RequestMapping(value = "/storage")
-public class StorageUploadController {
+@RequestMapping(value = "/upload")
+public class StorageUploadUIController {
 
     private final DatabaseStorageService databaseStorageService;
 
     @Autowired
-    public StorageUploadController(FileSystemStorageService fileSystemStorageService, DatabaseStorageService databaseStorageService) {
+    public StorageUploadUIController(FileSystemStorageService fileSystemStorageService, DatabaseStorageService databaseStorageService) {
         this.databaseStorageService = databaseStorageService;
     }
 
     @GetMapping("/")
     public String listUploadedFiles(Model model) throws IOException {
         model.addAttribute("files", databaseStorageService.loadAll().stream().map(
-                path -> MvcUriComponentsBuilder.fromMethodName(StorageUploadController.class,
+                path -> MvcUriComponentsBuilder.fromMethodName(StorageUploadUIController.class,
                         "serveFile",  path.getId().toString() + "/" + path.getFilename().toString()).build().toString())
                 .collect(Collectors.toList()));
 
@@ -52,15 +50,6 @@ public class StorageUploadController {
         Resource file = databaseStorageService.loadAsResource(id);
         return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
                 "attachment; filename=\"" + file.getFilename() + "\"").body(file);
-    }
-
-    @PostMapping("/")
-    public String handleFileUpload(@RequestParam("file") MultipartFile file,
-            RedirectAttributes redirectAttributes) {
-            databaseStorageService.store(file);
-        redirectAttributes.addFlashAttribute("message",
-                "You successfully upload " + file.getOriginalFilename() + "!");
-        return "redirect:/storage/";
     }
 
     @ExceptionHandler(StorageFileNotFoundException.class)

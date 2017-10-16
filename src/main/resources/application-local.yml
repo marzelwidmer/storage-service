@@ -22,6 +22,5 @@ spring:
   zipkin:
     enabled: false
 
-
 server:
   port: 9003
