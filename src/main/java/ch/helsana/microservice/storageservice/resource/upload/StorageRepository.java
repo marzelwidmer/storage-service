@@ -1,4 +1,4 @@
-package ch.helsana.microservice.storageservice.resource.storage;
+package ch.helsana.microservice.storageservice.resource.upload;
 
 import ch.helsana.microservice.storageservice.infrastructure.domain.StorageFile;
 import org.springframework.data.repository.CrudRepository;
@@ -7,7 +7,5 @@ import org.springframework.data.repository.CrudRepository;
  * @author marcelwidmer
  */
 public interface StorageRepository extends CrudRepository<StorageFile, String> {
-
-    StorageFile findByFilename(String name);
 
 }

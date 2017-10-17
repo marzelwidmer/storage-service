@@ -1,4 +1,4 @@
-package ch.helsana.microservice.storageservice.resource.storage;
+package ch.helsana.microservice.storageservice.resource.upload;
 
 import ch.helsana.microservice.storageservice.infrastructure.domain.StorageFile;
 import ch.helsana.microservice.storageservice.infrastructure.exception.StorageException;
@@ -26,7 +26,7 @@ public class DatabaseStorageService {
         this.storageRepository = storageRepository;
     }
 
-    public void store(MultipartFile file) {
+    public String store(MultipartFile file) {
         String filename = StringUtils.cleanPath(file.getOriginalFilename());
         try {
             if (file.isEmpty()) {
@@ -40,7 +40,8 @@ public class DatabaseStorageService {
             }
             StorageFile storageFile = StorageFile.builder().data(file.getBytes())
                     .filename(file.getOriginalFilename()).build();
-            storageRepository.save(storageFile);
+            StorageFile save = storageRepository.save(storageFile);
+            return save.getId();
         } catch (IOException e) {
             throw new StorageException("Failed to store file " + filename, e);
         }
@@ -51,17 +52,6 @@ public class DatabaseStorageService {
         return (List<StorageFile>)storageRepository.findAll();
     }
 
-
-    public Resource loadAsResourceByFileName(String filename) {
-        StorageFile storageFile = storageRepository.findByFilename(filename);
-        try {
-            Path file = Files.write(Paths.get(storageFile.getFilename()), storageFile.getData());
-            Resource resource = new UrlResource(file.toUri());
-            return resource;
-        } catch (Exception e) {
-            throw new StorageFileNotFoundException("Could not read file: " + filename, e);
-        }
-    }
 
     public Resource loadAsResource(String id) {
         StorageFile storageFile = storageRepository.findOne(id);

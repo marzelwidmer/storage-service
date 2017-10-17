@@ -1,7 +1,7 @@
 package ch.helsana.microservice.storageservice.resource.index;
 
 
-import ch.helsana.microservice.storageservice.resource.storage.UploadController;
+import ch.helsana.microservice.storageservice.resource.upload.UploadController;
 import org.springframework.hateoas.ResourceSupport;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
