@@ -9,6 +9,10 @@ spring:
     basename: i18n/messages
     cache-seconds: -1
     encoding: UTF-8
+  http:
+    multipart:
+      max-request-size: 10MB
+      max-file-size: 10MB
   cloud:
     config:
       label: @project.name@
@@ -27,11 +31,6 @@ spring:
     flush-interval: 1
     service:
       name: @project.name@
-    base-url: http://${server.address}:9411/
-  http:
-    multipart:
-      max-request-size: 10MB
-      max-file-size: 10MB
 
 # Server
 server:
