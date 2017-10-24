@@ -23,7 +23,7 @@ public class UploadController {
     }
 
 
-    @PostMapping("/")
+    @PostMapping
     public ResponseEntity fileUpload(@RequestParam("file") MultipartFile file) {
         String id = databaseStorageService.store(file);
         return new ResponseEntity(FileUploadResponse.builder().storageId(id).build(), HttpStatus.OK);
