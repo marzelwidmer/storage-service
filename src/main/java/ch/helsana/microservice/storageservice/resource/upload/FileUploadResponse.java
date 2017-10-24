@@ -7,6 +7,6 @@ import lombok.Data;
 @Builder
 public class FileUploadResponse {
 
-    private String id;
+    private String storageId;
 
 }
