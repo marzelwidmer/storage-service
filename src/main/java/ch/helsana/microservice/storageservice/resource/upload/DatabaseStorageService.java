@@ -47,6 +47,9 @@ public class DatabaseStorageService {
         }
     }
 
+    public StorageFile getFile(String id){
+        return storageRepository.findOne(id);
+    }
 
     public List<StorageFile> loadAll() {
         return (List<StorageFile>)storageRepository.findAll();
