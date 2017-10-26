@@ -10,6 +10,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 @RequestMapping(value = "/upload")
 public class UploadController {
@@ -23,10 +27,31 @@ public class UploadController {
 
 
     @PostMapping
-    public ResponseEntity fileUpload(@RequestParam("file") MultipartFile file) {
-        String id = databaseStorageService.store(file);
-        return new ResponseEntity(FileUploadResponse.builder().storageId(id).build(), HttpStatus.OK);
+    public ResponseEntity mulitFileUpload(@RequestPart("ad") String adString, @RequestParam("file") List<MultipartFile> file) throws IOException {
+//        FileUploadResponse jsonAd = new ObjectMapper().readValue(adString, FileUploadResponse.class);
+        List<String> storageFileList =  new ArrayList<>();
+        file.stream().forEach(uploadedFile -> {
+            String storageId = databaseStorageService.store(uploadedFile);
+            storageFileList.add(storageId);
+
+        });
+        FileUploadResponse fileUploadResponse = FileUploadResponse.builder().storageId(storageFileList).build();
+        return new ResponseEntity(fileUploadResponse, HttpStatus.OK);
     }
+
+
+
+    @PostMapping
+    public ResponseEntity fileUpload(@RequestParam("file") List<MultipartFile> file) throws IOException {
+        String id = databaseStorageService.store(file.get(0));
+
+        List<String> storageFileList =  new ArrayList<>();
+        storageFileList.add(id);
+        return new ResponseEntity(FileUploadResponse.builder().storageId(storageFileList).build(), HttpStatus.OK);
+    }
+
+
+
 
     @GetMapping("/{id}")
     @ResponseBody
