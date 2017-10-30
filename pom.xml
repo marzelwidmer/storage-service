@@ -81,10 +81,20 @@
         <!-- ================= Frontend ===================== -->
         <bootstrap.version>3.3.7</bootstrap.version>
         <jquery.version>3.1.1</jquery.version>
+        <!-- ================= FSL Components ===================== -->
+        <fsl-security.version>1.0.3-SNAPSHOT</fsl-security.version>
     </properties>
 
 
     <dependencies>
+        <!-- ================= FSL Components ===================== -->
+        <!-- security-library -->
+        <dependency>
+            <groupId>ch.helsana.microservice</groupId>
+            <artifactId>fsl-security</artifactId>
+            <version>${fsl-security.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>de.codecentric</groupId>
             <artifactId>spring-boot-admin-starter-client</artifactId>
