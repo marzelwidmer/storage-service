@@ -78,12 +78,11 @@
         <grant-user>myhlscustomeruser</grant-user>
         <groovy-maven-plugin.version>2.0</groovy-maven-plugin.version>
 
-        <!-- ================= FSL Components ===================== -->
-        <fsl-security.version>1.0.2</fsl-security.version>
-
         <!-- ================= Frontend ===================== -->
         <bootstrap.version>3.3.7</bootstrap.version>
         <jquery.version>3.1.1</jquery.version>
+        <!-- ================= FSL Components ===================== -->
+        <fsl-security.version>1.0.3-SNAPSHOT</fsl-security.version>
     </properties>
 
 
@@ -95,6 +94,7 @@
             <artifactId>fsl-security</artifactId>
             <version>${fsl-security.version}</version>
         </dependency>
+
         <dependency>
             <groupId>de.codecentric</groupId>
             <artifactId>spring-boot-admin-starter-client</artifactId>
@@ -314,20 +314,6 @@
                                     <artifactId>ojdbc6</artifactId>
                                     <version>${ojdbc6.version}</version>
                                     <file>${project.basedir}/libs/ojdbc6-${ojdbc6.version}.jar</file>
-                                    <packaging>jar</packaging>
-                                </configuration>
-                            </execution>
-                            <execution>
-                                <id>fsl-security</id>
-                                <phase>clean</phase>
-                                <goals>
-                                    <goal>install-file</goal>
-                                </goals>
-                                <configuration>
-                                    <groupId>ch.helsana.microservice</groupId>
-                                    <artifactId>fsl-security</artifactId>
-                                    <version>${fsl-security.version}</version>
-                                    <file>${project.basedir}/libs/fsl-security-${fsl-security.version}.jar</file>
                                     <packaging>jar</packaging>
                                 </configuration>
                             </execution>

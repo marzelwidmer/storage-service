@@ -1,5 +1,6 @@
 package ch.helsana.microservice.storageservice.infrastructure.config;
 
+import ch.helsana.microservice.security.jwt.JWTForwardingRestTemplate;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 import org.springframework.context.annotation.Bean;
@@ -20,7 +21,7 @@ public class WebBeanConfiguration extends WebMvcConfigurerAdapter {
 
     @Bean
     public RestTemplate restTemplate() {
-        return new RestTemplate();
+        return new JWTForwardingRestTemplate();
     }
 
     @Bean
