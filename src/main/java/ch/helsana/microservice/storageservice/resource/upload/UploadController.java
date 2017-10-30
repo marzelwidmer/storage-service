@@ -40,15 +40,15 @@ public class UploadController {
     }
 
 
-
-    @PostMapping
-    public ResponseEntity fileUpload(@RequestParam("file") List<MultipartFile> file) throws IOException {
-        String id = databaseStorageService.store(file.get(0));
-
-        List<String> storageFileList =  new ArrayList<>();
-        storageFileList.add(id);
-        return new ResponseEntity(FileUploadResponse.builder().storageId(storageFileList).build(), HttpStatus.OK);
-    }
+//
+//    @PostMapping
+//    public ResponseEntity fileUpload(@RequestParam("file") List<MultipartFile> file) throws IOException {
+//        String id = databaseStorageService.store(file.get(0));
+//
+//        List<String> storageFileList =  new ArrayList<>();
+//        storageFileList.add(id);
+//        return new ResponseEntity(FileUploadResponse.builder().storageId(storageFileList).build(), HttpStatus.OK);
+//    }
 
 
 
