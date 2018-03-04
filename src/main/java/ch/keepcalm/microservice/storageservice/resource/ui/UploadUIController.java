@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 
 @Controller
 @Profile(value = "local")
-@RequestMapping(value = "/storage")
+@RequestMapping(value = "/ui")
 public class UploadUIController {
 
     private final DatabaseStorageService databaseStorageService;
@@ -44,7 +44,7 @@ public class UploadUIController {
 
 
 
-     @GetMapping("/")
+    @GetMapping("/")
     public String listUploadedFiles(Model model) throws IOException {
         model.addAttribute("files", databaseStorageService.loadAll().stream().map(
                 path -> MvcUriComponentsBuilder.fromMethodName(UploadUIController.class,

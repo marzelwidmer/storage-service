@@ -1,6 +1,7 @@
 package ch.keepcalm.microservice.storageservice.resource.index;
 
 
+import ch.keepcalm.microservice.storageservice.resource.ui.UploadUIController;
 import ch.keepcalm.microservice.storageservice.resource.upload.UploadController;
 import org.springframework.hateoas.ResourceSupport;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +23,7 @@ public class ApiController {
         ResourceSupport resourceSupport = new ResourceSupport();
         resourceSupport.add(linkTo(methodOn(ApiController.class).api()).withSelfRel());
         resourceSupport.add(linkTo(UploadController.class).withRel("upload"));
+        resourceSupport.add(linkTo(UploadUIController.class).withRel("ui"));
         resourceSupport.add(linkTo(ApiController.class).slash("/manage").slash("/docs/manual.html").withRel("documentation"));
 
         return resourceSupport;
