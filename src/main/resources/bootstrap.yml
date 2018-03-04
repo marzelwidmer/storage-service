@@ -1,6 +1,3 @@
-encrypt:
-  key: 2224c9b0294f4f429dba92fb92eb75d6
-
 spring:
   cloud:
     config:
