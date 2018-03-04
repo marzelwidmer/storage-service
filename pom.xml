@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>ch.helsana.microservice</groupId>
+    <groupId>ch.keepcalm.microservice</groupId>
     <artifactId>storage-service</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
@@ -75,7 +75,7 @@
         <!-- Directories for generating SQL scripts -->
         <flyway-dir>${project.basedir}/src/main/resources/db/migration</flyway-dir>
         <sql-script-dir>${project.build.directory}/sql-scripts</sql-script-dir>
-        <grant-user>myhlscustomeruser</grant-user>
+        <grant-user>---</grant-user>
         <groovy-maven-plugin.version>2.0</groovy-maven-plugin.version>
 
         <!-- ================= Frontend ===================== -->
@@ -684,61 +684,6 @@
             </build>
         </profile>
 
-
-        <!--  release-dry-run-->
-        <profile>
-            <id>release-dry-run</id>
-            <!--Deploy artifacts to nexus PRE-PROD-->
-            <distributionManagement>
-                <snapshotRepository>
-                    <id>snapshots</id>
-                    <name>Helsana Snapshots auf Alma Entw.</name>
-                    <url>http://alma-artifact-entw.hel.kko.ch/nexus/repository/snapshots/</url>
-                </snapshotRepository>
-
-                <repository>
-                    <id>releases</id>
-                    <name>Helsana Releases auf Alma Entw.</name>
-                    <url>http://alma-artifact-entw.hel.kko.ch/nexus/repository/releases/</url>
-                </repository>
-            </distributionManagement>
-
-            <!--Perform release without tagging origin/master-->
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>external.atlassian.jgitflow</groupId>
-                        <artifactId>jgitflow-maven-plugin</artifactId>
-                        <version>${jgitflow-maven-plugin.version}</version>
-                        <configuration>
-                            <!--do not push release branch -->
-                            <pushReleases>false</pushReleases>
-                            <pushHotfixes>false</pushHotfixes>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-
-        <!-- release -->
-        <profile>
-            <id>release</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <!-- Distribution -->
-            <distributionManagement>
-                <repository>
-                    <id>releases</id>
-                    <url>dav:http://alma-artifact/nexus/content/repositories/releases/</url>
-                </repository>
-                <snapshotRepository>
-                    <uniqueVersion>false</uniqueVersion>
-                    <id>snapshots</id>
-                    <url>dav:http://alma-artifact/nexus/content/repositories/snapshots/</url>
-                </snapshotRepository>
-            </distributionManagement>
-        </profile>
     </profiles>
 
     <!-- SpringCloud -->
